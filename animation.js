@@ -588,11 +588,11 @@ function playSoundSequence() {
         clickSound.currentTime = 0;
         clickSound.play();
 
-        // ピック音をしばらくして再生（500ms後）
+        // ピック音をしばらくして再生（600ms後）
         setTimeout(() => {
             pickSound.currentTime = 0;
             pickSound.play();
-        }, 500); // 500ms後にピック音を再生
+        }, 600); // 600ms後にピック音を再生
     }
 }
 
