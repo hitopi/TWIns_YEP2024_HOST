@@ -67,8 +67,9 @@ function addAnimationStyles() {
         }
 
         .quiz-box p {
-            font-size: 1.2rem;
-            color: #000;
+            font-size: 1.5rem; /* 文字サイズを大きく調整 */
+            font-weight: bold; /* 太字にしたい場合は追加 */
+            color: #000; /* 必要に応じて文字色を変更 */
             margin-bottom: 20px;
         }
 
@@ -528,11 +529,17 @@ function createWavyFish() {
     }
 }
 
-// クイズオプションボタンにクリックイベントを追加
 function addQuizOptionAnimation() {
     document.querySelectorAll('.quiz-option').forEach(button => {
         button.addEventListener('click', event => {
             event.preventDefault(); // デフォルトのリンク動作を防止
+
+            // クリック音を再生
+            const clickSound = document.getElementById('clickSound');
+            if (clickSound) {
+                clickSound.currentTime = 0; // 再生位置をリセット
+                clickSound.play(); // 音声を再生
+            }
 
             // 背景と文字色を変更
             button.classList.add('clicked');
@@ -571,9 +578,29 @@ function addQuizOptionAnimation() {
     });
 }
 
+// 音声を再生する関数
+function playSoundSequence() {
+    const clickSound = document.getElementById('clickSound');
+    const pickSound = document.getElementById('pickSound');
+
+    if (clickSound && pickSound) {
+        // クリック音を再生
+        clickSound.currentTime = 0;
+        clickSound.play();
+
+        // ピック音をしばらくして再生（500ms後）
+        setTimeout(() => {
+            pickSound.currentTime = 0;
+            pickSound.play();
+        }, 500); // 500ms後にピック音を再生
+    }
+}
+
+// 泡のアニメーションとクリック音を追加
 function addBubbleAnimation() {
     document.querySelectorAll('a.btn').forEach(button => {
         button.addEventListener('click', event => {
+            playSoundSequence(); // クリック音とピック音の再生
             event.preventDefault(); // デフォルトのリンク動作を防止
 
             // 背景と文字色を変更
